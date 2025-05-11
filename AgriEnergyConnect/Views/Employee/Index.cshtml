@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AgriEnergyConnect.Models.Farmer>
+
+@{
+    ViewData["Title"] = "Farmers List";
+}
+
+<h1>Farmers List</h1>
+
+<p>
+    <a asp-action="AddFarmer" class="btn btn-primary">Add New Farmer</a>
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Area</th>
+                    <th>Contact Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FirstName @item.LastName</td>
+                            <td>@item.Area</td>
+                            <td>@item.ContactNumber</td>
+                            <td>
+                                <a asp-action="FarmerDetails" asp-route-id="@item.Id" class="btn btn-sm btn-info">View Products</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">No farmers found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

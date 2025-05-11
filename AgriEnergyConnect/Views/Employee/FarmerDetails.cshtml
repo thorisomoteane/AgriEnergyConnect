@@ -1,0 +1,59 @@
+﻿@model AgriEnergyConnect.Models.Farmer
+
+@{
+    ViewData["Title"] = "Farmer Details";
+}
+
+<h1>Products by @Model.FirstName @Model.LastName</h1>
+
+<div class="mb-3">
+    <dl class="row">
+        <dt class="col-sm-2">Name:</dt>
+        <dd class="col-sm-10">@Model.FirstName @Model.LastName</dd>
+
+        <dt class="col-sm-2">Area:</dt>
+        <dd class="col-sm-10">@Model.Area</dd>
+
+        <dt class="col-sm-2">Contact:</dt>
+        <dd class="col-sm-10">@Model.ContactNumber</dd>
+    </dl>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to Farmers List</a>
+</div>
+
+<h3>Products</h3>
+
+@if (Model.Products != null && Model.Products.Any())
+{
+    <div class="row">
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <span class="text-muted">No Image</span>
+                        </div>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text"><strong>Category:</strong> @item.Category</p>
+                        <p class="card-text">@(item.Description.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)</p>
+                        <a asp-action="ProductDetails" asp-route-id="@item.Id" class="btn btn-sm btn-info">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        This farmer hasn't added any products yet.
+    </div>
+}

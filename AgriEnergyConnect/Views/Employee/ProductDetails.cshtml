@@ -1,0 +1,49 @@
+﻿@model AgriEnergyConnect.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h1>Product Details</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>@Model.Name</h4>
+                <p class="text-muted mb-0">By: @Model.Farmer.FirstName @Model.Farmer.LastName (@Model.Farmer.Area)</p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (!string.IsNullOrEmpty(Model.ImagePath))
+                        {
+                            <img src="@Model.ImagePath" alt="@Model.Name" class="img-fluid mb-3" />
+                        }
+                        else
+                        {
+                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <span class="text-muted">No Image</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4">Category:</dt>
+                            <dd class="col-sm-8">@Model.Category</dd>
+
+                            <dt class="col-sm-4">Description:</dt>
+                            <dd class="col-sm-8">@Model.Description</dd>
+
+                            <dt class="col-sm-4">Contact:</dt>
+                            <dd class="col-sm-8">@Model.Farmer.ContactNumber</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-action="FarmerDetails" asp-route-id="@Model.FarmerId" class="btn btn-secondary">Back to Farmer</a>
+            </div>
+        </div>
+    </div>
+</div>

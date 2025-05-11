@@ -1,0 +1,56 @@
+﻿@model AgriEnergyConnect.Models.Farmer
+
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<h1>Add New Farmer</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="AddFarmer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Area" class="control-label"></label>
+                <select asp-for="Area" class="form-control">
+                    <option value="">-- Select Area --</option>
+                    <option value="Pretoria">Pretoria</option>
+                    <option value="Johannesburg">Johannesburg</option>
+                    <option value="Durban">Durban</option>
+                    <option value="Cape Town">Cape Town</option>
+                </select>
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContactNumber" class="control-label"></label>
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Add Farmer" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

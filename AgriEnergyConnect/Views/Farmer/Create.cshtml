@@ -1,0 +1,63 @@
+﻿@model AgriEnergyConnect.Models.ViewModels.CreateProductViewModel
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h1>Create New Product</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @ViewBag.ErrorMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label">Product Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Category" class="control-label">Category</label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">-- Select Category --</option>
+                    <option value="Solar Power">Solar Power</option>
+                    <option value="Water Management & Irrigation">Water Management & Irrigation</option>
+                    <option value="Wind Energy">Wind Energy</option>
+                    <option value="Energy Storage">Energy Storage</option>
+                    <option value="Smart Farm Tech">Smart Farm Tech</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="imageFile" class="control-label">Product Image (Optional)</label>
+                <input type="file" id="imageFile" name="imageFile" class="form-control" />
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

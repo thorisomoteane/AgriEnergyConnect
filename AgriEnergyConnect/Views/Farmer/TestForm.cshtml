@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Test Form";
+}
+
+<h1>Test Form Submission</h1>
+
+@if (ViewBag.SubmissionResult != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.SubmissionResult
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="TestForm" method="post">
+            <div class="form-group">
+                <label for="testName" class="control-label">Test Input</label>
+                <input type="text" id="testName" name="testName" class="form-control" />
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Submit Test" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
